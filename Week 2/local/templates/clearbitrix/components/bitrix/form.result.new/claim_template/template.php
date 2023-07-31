@@ -25,27 +25,29 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
         </div>
         <form class="contact-form__form" action="/" method="POST">
             <div class="contact-form__form-inputs">
-                <?foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
-
-                    <div class="input contact-form__input"><label class="input__label" for="medicine_name">
-                            <div class="input__label-text"><?=$arQuestion["CAPTION"]?><?if ($arQuestion["REQUIRED"] == "Y"):?><?=$arResult["REQUIRED_SIGN"];?><?endif;?></div>
-                            <input class="input__input" type="text" id="medicine_name" name="medicine_name" value=""
-                                   required="">
-                            <div class="input__notification">Поле должно содержать не менее 3-х символов</div>
-                        </label>
-                    </div>
-
+<!--                --><?//foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
+<!---->
+<!--                    <div class="input contact-form__input"><label class="input__label" for="medicine_name">-->
+<!--                            <div class="input__label-text">--><?php //=$arQuestion["CAPTION"]?><!----><?//if ($arQuestion["REQUIRED"] == "Y"):?><!----><?php //=$arResult["REQUIRED_SIGN"];?><!----><?//endif;?><!--</div>-->
+<!--                            <input class="input__input" type="text" id="medicine_name" name="medicine_name" value=""-->
+<!--                                   required="">-->
+<!--                            <div class="input__notification">Поле должно содержать не менее 3-х символов</div>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!---->
 <!--                    <pre>-->
 <!--                        --><?php //= print_r($arQuestion); ?>
 <!--                    </pre>-->
-
-                <? endforeach; ?>
-                <div class="input contact-form__input"><label class="input__label" for="medicine_name">
+<!---->
+<?// endforeach; ?>
+                <div class="input contact-form__input">
+                    <label class="input__label" for="medicine_name">
                         <div class="input__label-text">Ваше имя*</div>
                         <input class="input__input" type="text" id="medicine_name" name="medicine_name" value=""
                                required="">
                         <div class="input__notification">Поле должно содержать не менее 3-х символов</div>
-                    </label></div>
+                    </label>
+                </div>
 
                 <div class="input contact-form__input"><label class="input__label" for="medicine_company">
                         <div class="input__label-text">Компания/Должность*</div>
@@ -138,16 +140,24 @@ if ($arResult["isFormTitle"])
 		else
 		{
 	?>
-		<tr>
-			<td>
+
+            <div class="input contact-form__input">
+                <label class="input__label" for="<?=$arQuestion["CAPTION"]?>">
+                    <div class="input__label-text"><?=$arQuestion["CAPTION"]?><?if ($arQuestion["REQUIRED"] == "Y"):?><?=$arResult["REQUIRED_SIGN"];?><?endif;?></div>
+                    <input class="input__input" type="text" id="<?=$arQuestion["CAPTION"]?>" name="<?=$arQuestion["CAPTION"]?>" value=""
+                           required="">
+                    <div class="input__notification">Поле должно содержать не менее 3-х символов</div>
+                </label>
+            </div>
+
 				<?if (is_array($arResult["FORM_ERRORS"]) && array_key_exists($FIELD_SID, $arResult['FORM_ERRORS'])):?>
 				<span class="error-fld" title="<?=htmlspecialcharsbx($arResult["FORM_ERRORS"][$FIELD_SID])?>"></span>
 				<?endif;?>
 				<?=$arQuestion["CAPTION"]?><?if ($arQuestion["REQUIRED"] == "Y"):?><?=$arResult["REQUIRED_SIGN"];?><?endif;?>
 				<?=$arQuestion["IS_INPUT_CAPTION_IMAGE"] == "Y" ? "<br />".$arQuestion["IMAGE"]["HTML_CODE"] : ""?>
-			</td>
+
 			<td><?=$arQuestion["HTML_CODE"]?></td>
-		</tr>
+
 	<?
 		}
 	} //endwhile
